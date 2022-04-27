@@ -37,12 +37,12 @@ app.get('/api/notes', (request, response) => {
 app.get('/api/notes/:id', (request, response) => {
     const id = Number(request.params.id)
     const note = notes.find(note => note.id == id)
+    if (note) {
+        response.json(note)
+    } else {
+        response.status(404).end()
+    }
     response.status(204).end()
-    // if (note) {
-    //     response.json(note)
-    // } else {
-    //     response.status(404).end()
-    // }
 })
 app.post('/api/notes', (request, response) => {
     const note = request.body
